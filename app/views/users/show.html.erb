@@ -1,0 +1,18 @@
+<h1><%= @user.first_name.capitalize %>'s profile page</h1>
+
+<ul>
+  <li>First Name: <%= @user.first_name.capitalize %></li>
+  <li>Last Name: <%= @user.last_name.capitalize %></li>
+  <li>Account Information:
+    <ul>
+      <li>Bank Name: <%= @user.account_name.capitalize %></li>
+      <li>Account Number: <%= @user.account_number %></li>
+      <li>Account Type: Checking</li>
+      <li>Account Balance: <%= @user.account_balance %></li>
+    </ul>
+  </li>
+  <li>Last Amount Contributed: $<%= @last_contribution.transaction_amount %> on <%= @last_contribution.created_at %> to Group <%= @last_contribution_group.name %></li>
+  <li>Total Amount Contributed to All Groups: $<%= @user.total_contribution %></li>
+  <li>Last Disbursement Received: $<%= @last_disbursement.transaction_amount %> on <%= @last_disbursement.created_at %> to Group <%= @last_disbursement_group.name %></li>
+  <li>Total Disbursement Received: $<%= @user.total_received %></li>
+</ul>

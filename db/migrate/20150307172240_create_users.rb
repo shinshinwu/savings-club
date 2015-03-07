@@ -8,6 +8,8 @@ class CreateUsers < ActiveRecord::Migration
       t.string :account_name
       t.integer :account_balance
       t.integer :account_number
+      t.integer :total_contribution, default: 0
+      t.integer :total_received, default: 0
 
       t.timestamps null: false
     end
