@@ -18,7 +18,7 @@ ActiveRecord::Schema.define(version: 20150307174609) do
 
   create_table "groups", force: :cascade do |t|
     t.string   "name"
-    t.string   "type"
+    t.string   "group_type"
     t.date     "payment_date"
     t.integer  "payment_amount"
     t.integer  "disbursement_amount"
@@ -48,11 +48,14 @@ ActiveRecord::Schema.define(version: 20150307174609) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
+    t.string   "password_digest"
     t.string   "account_name"
     t.integer  "account_balance"
     t.integer  "account_number"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "total_contribution", default: 0
+    t.integer  "total_received",     default: 0
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
 end

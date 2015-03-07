@@ -1,0 +1,28 @@
+<h1>Sign Up</h1>
+
+<div class="row">
+  <%= form_for(@user) do |f| %>
+
+    <%= render 'shared/error_messages' %>
+
+    <%= f.label :first_name, 'First Name' %>
+    <%= f.text_field :first_name, placeholder: 'Clark' %>
+
+    <%= f.label :last_name, 'Last Name' %>
+    <%= f.text_field :last_name, placeholder: 'Kent' %>
+
+    <%= f.label :email, 'Email' %>
+    <%= f.email_field :email, placeholder: 'clarkkent@gmail.com' %>
+
+    <%= f.label :password, 'Password' %>
+    <%= f.password_field :password, placeholder: 'Secure Password more than 6 characters' %>
+
+    <%= f.label :account_name, 'Bank Institution Name' %>
+    <%= f.text_field :account_name, placeholder: 'Bank of America' %>
+
+    <%= f.label :account_number, 'Bank Account Number' %>
+    <%= f.number_field :account_number, placeholder: '111XXXXXXX' %>
+
+    <%= f.submit "Create my account" %>
+  <% end %>
+</div>
