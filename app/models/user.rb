@@ -4,4 +4,11 @@ class User < ActiveRecord::Base
   has_many :transactions
 
   # write user validations and password hash shit here
+  validates :first_name, :presence => true
+  validates :last_name, :presence => true
+  validates :email,    :presence => true,
+                       :uniqueness => true,
+                       :format => { :with => /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
+  has_secure_password
+  validates :password, length: { minimum: 6 }
 end
