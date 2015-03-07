@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   resources :groups do
     member do
+      get 'newmembers' => 'groups#new_members'
       post 'addmembers' => 'groups#add_members'
     end
   end

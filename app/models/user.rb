@@ -11,4 +11,8 @@ class User < ActiveRecord::Base
                        :format => { :with => /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   has_secure_password
   validates :password, length: { minimum: 6 }
+
+  def paid?(group_id)
+    return UserGroup.where(user_id: self.id, group_id: group_id).first.paid
+  end
 end

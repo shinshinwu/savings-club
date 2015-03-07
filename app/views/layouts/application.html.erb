@@ -20,7 +20,7 @@
           <li>Hello <%= current_user.first_name.capitalize %></li>
           <li><%= link_to "Profile", current_user %></li>
           <li><%= link_to "View My Clubs", "#" %></li>
-          <li><%= link_to "Create New Clubs", "#" %></li>
+          <li><%= link_to "Create New Clubs", new_group_path %></li>
           <li><%= link_to "Log out", logout_path, method: "delete" %></li>
         <% else %>
           <li><%= link_to "Sign Up", signup_path %></li>
