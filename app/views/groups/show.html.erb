@@ -4,12 +4,13 @@
   <li>Group Type: <%= @group.group_type %></li>
   <li>Payment Amount per Month: <%= @group.payment_amount %></li>
   <li>Payout Amount per Month: <%= @group.disbursement_amount %></li>
+  <li>Next Payout Date:  <%= @group.disbursement_date %></li>
 </ul>
 <table>
 <thead>
 <tr>
     <th>Members</th>
-    <th>Last Payment Date</th>
+    <th>Last Contribution Made On:</th>
     <th>Paid?</th>
 </tr>
 </thead>
@@ -17,7 +18,7 @@
 <% @group.users.each do |user| %>
 <tr>
     <td><%= user.first_name %></td>
-    <td><%= @group.payment_date %></td>
+    <td><%= user.last_contribution.created_at %></td>
     <td><%= user.paid?(@group.id) %></td>
 
 </tr>

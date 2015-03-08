@@ -11,8 +11,87 @@
       <li>Account Balance: <%= @user.account_balance %></li>
     </ul>
   </li>
-  <li>Last Amount Contributed: $<%= @last_contribution.transaction_amount %> on <%= @last_contribution.created_at %> to Group <%= @last_contribution_group.name %></li>
+  <li>Last Amount Contributed: $<%= @user.last_contribution.transaction_amount %> on <%= @user.last_contribution.created_at %> to Group <%= @last_contribution_group.name %></li>
   <li>Total Amount Contributed to All Groups: $<%= @user.total_contribution %></li>
-  <li>Last Disbursement Received: $<%= @last_disbursement.transaction_amount %> on <%= @last_disbursement.created_at %> to Group <%= @last_disbursement_group.name %></li>
+  <li>Last Disbursement Received: $<%= @user.last_disbursement.transaction_amount %> on <%= @user.last_disbursement.created_at %> to Group <%= @last_disbursement_group.name %></li>
   <li>Total Disbursement Received: $<%= @user.total_received %></li>
 </ul>
+
+<h2>Groups Information</h2>
+
+<h2>Savings Clubs</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Group Name</th>
+      <th>Total Members</th>
+      <th>Rounds Remaining</th>
+      <th>Payment Amount</th>
+      <th>Payout Amount</th>
+      <th>Funds Received?</th>
+      <th>Payment Due Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @savings.each do |group| %>
+    <tr>
+      <td><a href="/groups/<%= group.id %>"><%= group.name %></a></td>
+      <td><%= group.users.count %></td>
+      <td><%= group.rounds_remaining %></td>
+      <td><%= group.payment_amount %></td>
+      <td><%= group.disbursement_amount %></td>
+      <td><%= @user.paid?(group.id) %></td>
+      <td><%= group.payment_date + 15 %></td>
+      <td>
+        <% if @user.transactions.where(group_id: group.id, transaction_type: "debit").last == nil || @user.transactions.where(group_id: group.id, transaction_type: "debit").last.created_at.mday != Time.now.getutc.mday %>
+          <form action="/users/<%= @user.id %>/makepayment?group=<%= group.id %>" method="post">
+            <input type="submit" value="Pay">
+          </form>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<h2>Credit Clubs</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Group Name</th>
+      <th>Total Members</th>
+      <th>Rounds Occured</th>
+      <th>Payment Amount</th>
+      <th>Interest Rate</th>
+      <th>Interest Earned</th>
+      <th>Next Payout Date</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @credit.each do |group| %>
+    <tr>
+      <td><a href="/groups/<%= group.id %>"><%= group.name %></a></td>
+      <td><%= group.users.count %></td>
+      <td><%= rand(0..group.users.count) %></td>
+      <td><%= group.payment_amount %></td>
+      <td><%= @rando_interest_rate %></td>
+      <td><%= group.payment_amount * @rando_interest_rate %></td>
+      <td><%= group.disbursement_date %></td>
+      <td>
+        <% if @user.transactions.where(group_id: group.id, transaction_type: "debit").last == nil || @user.transactions.where(group_id: group.id, transaction_type: "debit").last.created_at.mday != Time.now.getutc.mday %>
+          <form action="/users/<%= @user.id %>/makepayment?group=<%= group.id %>" method="post">
+            <input type="submit" value="Pay">
+          </form>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<button><%= link_to "Create New Club", new_group_path %></button>

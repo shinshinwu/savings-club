@@ -15,4 +15,12 @@ class User < ActiveRecord::Base
   def paid?(group_id)
     return UserGroup.find_by(user_id: self.id, group_id: group_id).paid
   end
+
+  def last_contribution
+    return self.transactions.where(transaction_type: "debit").last
+  end
+
+  def last_disbursement
+    return self.transactions.where(transaction_type: "credit").last
+  end
 end
