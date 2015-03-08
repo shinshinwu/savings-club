@@ -1,3 +1,4 @@
+require "nexmos"
 class UsersController < ApplicationController
   before_action :logged_in_user, only: [:edit, :update]
   before_action :correct_user, only: [:edit, :update]
@@ -63,6 +64,31 @@ class UsersController < ApplicationController
     # update transaction
     Transaction.create(user_id: @user.id, group_id: @group.id, transaction_type: "debit", transaction_amount: @group.payment_amount)
     redirect_to @user
+
+#     client = ::Nexmos::Message.new(key:'ec19c1ba', secret: 'ba674a8a')
+# # get result from Nexmo
+# res = client.send_message(from: 'Ruby', to: '14014972054', text: 'Payment Confirmed')
+# # check if send is success
+# if res.success?
+#   puts "ok"
+# else
+#   puts "fail"
+# end
+nexmo = Nexmo::Client.new(key:'ec19c1ba', secret: 'ba674a8a')
+
+response = nexmo.send_message({
+  from: 'RUBY',
+  to: '14014972054',
+  text: 'Hello world'
+})
+
+if response.success?
+  puts "Sent message: #{response.message_id}"
+elsif response.failure?
+  raise response.error
+end
+
+
   end
 
   private

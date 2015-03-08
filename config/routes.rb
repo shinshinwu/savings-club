@@ -7,8 +7,10 @@ Rails.application.routes.draw do
   resources :users do
     member do
       post 'makepayment' => 'users#make_payment'
+     # get 'makepayment' => 'users#make_payment'
     end
   end
+
   get 'signup' => 'users#new'
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
