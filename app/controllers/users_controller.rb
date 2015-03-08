@@ -9,10 +9,11 @@ class UsersController < ApplicationController
   def show
     #user profile page that shows questions
     @user = User.find(params[:id])
-    @last_contribution = @user.transactions.where(transaction_type: "debit").last
-    @last_contribution_group = Group.find(@last_contribution.group_id)
-    @last_disbursement = @user.transactions.where(transaction_type: "credit").last
-    @last_disbursement_group = Group.find(@last_disbursement.group_id)
+    @last_contribution_group = Group.find(@user.last_contribution.group_id)
+    @last_disbursement_group = Group.find(@user.last_disbursement.group_id)
+    @credit = @user.groups.where(group_type: "Credit")
+    @savings = @user.groups.where(group_type: "Savings")
+    @rando_interest_rate = rand(4..12)
   end
 
   def new
@@ -53,6 +54,19 @@ class UsersController < ApplicationController
     User.find(params[:id]).destroy
     flash[:success] = "User deleted"
     redirect_to users_url
+  end
+
+  def make_payment
+    # update user payment amount
+    @user = User.find(params[:id])
+    p params
+    p params[:group]
+    @group = Group.find(params[:group])
+    @user.total_contribution += @group.payment_amount
+    # update transaction
+    Transaction.create(user_id: @user.id, group_id: @group.id, transaction_type: "debit", transaction_amount: @group.payment_amount)
+    flash[:success] = "Transaction Posted!"
+    redirect_to @user
   end
 
   private
