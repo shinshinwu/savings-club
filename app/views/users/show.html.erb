@@ -8,10 +8,32 @@ text {
   fill: #1072b8;
 }
 
+#new-club {
+  background-color: white;
+  width: 200px;
+}
+
+.savingsGoals {
+  background-color: white;
+  padding: 3%;
+  margin: 0 auto;
+  vertical-align: center;
+}
+
+.goals #amount {
+  color: red;
+}
+
 #donut1,
 #donut2,
 #donut3 {
   display: inline-block;
+  margin: 0 auto;
+  margin-left: 18%;
+}
+
+#pieChart {
+  margin: 0 auto;
 }
 
 .goals {
@@ -33,137 +55,236 @@ path.color1 {
 }
 </style>
 
-<h1><%= @user.first_name.capitalize %>'s profile page</h1>
+<div id="profile">
 
-<ul>
-  <li>First Name: <%= @user.first_name.capitalize %></li>
-  <li>Last Name: <%= @user.last_name.capitalize %></li>
-</ul>
-<div id="content">
+  <div id="content">
+
+    <div id="user-section" class="border-top">
+      <div id="container">
+
+        <div id="user-content">
+
+          <div id="avatar">
+          </div>
+
+          <div id="user-info">
+            <div id="user-name">
+              <p><%= @user.first_name.capitalize %> <%= @user.last_name.capitalize %></p>
+            </div>
+
+            <div id="user-email">
+              <p><%= @user.email %></p>
+            </div>
+          </div>
+
+        </div> <!-- end of user-content -->
+      </div> <!-- end of container -->
+    </div> <!-- end of user-section -->
+
     <div id="container">
-  <ul>
-    <li>Account Information:
-      <ul>
-        <li>Bank Name: <%= @user.account_name.capitalize %></li>
-        <li>Account Number: <%= @user.account_number %></li>
-        <li>Account Type: Checking</li>
-        <li>Account Balance: <%= @user.account_balance %></li>
-      </ul>
-    </li>
-    <li>Last Amount Contributed: $<%= @user.last_contribution.transaction_amount %> on <%= @user.last_contribution.created_at.strftime('%a %d %b %Y') %> to Group <%= @last_contribution_group.name %></li>
-    <li>Total Amount Contributed to All Groups: $<%= @user.total_contribution %></li>
-    <li>Last Disbursement Received: $<%= @user.last_disbursement.transaction_amount %> on <%= @user.last_disbursement.created_at.strftime('%a %d %b %Y') %> to Group <%= @last_disbursement_group.name %></li>
-    <li>Total Disbursement Received: $<%= @user.total_received %></li>
-  </ul>
 
-  <h2>Your Savings Goals Status</h2>
-  <div class="savingsGoals">
-    <div class="goals">
-      <h3>Group Team Red</h3>
-      <h3>$200 for Advance Credit Card Payment</h3>
-      <div id="donut1" data-donut="42">
+        <div id="table" class="account-info">
+          <h4 class="table-title">Account Info</h4>
+            <div id="data">
+              <div id="row">
+                  <div class="column1">
+                  <p>Bank Name</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p><%= @user.account_name.capitalize %></p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Acct. #</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p><%= @user.account_number %></p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Acct. Type</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p>Checking</p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Balance</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p>$<%= @user.account_balance %></p>
+                    </div>
+                </div>
+        </div><!-- end #data -->
+        </div><!-- end #table .account-info -->
+
+        <div id="table" class="activity-info">
+          <h4 class="table-title">Activity Info</h4>
+            <div id="data">
+              <div id="row">
+                  <div class="column1">
+                  <p>Last Amount Contributed</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p>$<%= @user.last_contribution.transaction_amount %> on <%= @user.last_contribution.created_at.strftime('%a %d %b %Y') %> to Group <%= @last_contribution_group.name %></p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Last Amount Contributed to All Clubs</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p>$<%= @user.total_contribution %></p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Last Amount Received</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p>$<%= @user.last_disbursement.transaction_amount %> on <%= @user.last_disbursement.created_at.strftime('%a %d %b %Y') %> to Group <%= @last_disbursement_group.name %></p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Last Amount Received to All Clubs</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p>$<%= @user.total_received %></p>
+                    </div>
+                </div>
+        </div><!-- end #data -->
+      </div><!-- end #table .activity-info -->
+
+    <div id="your-clubs-section">
+      <div id="section-title">
+        <h3 class="brand-text-color border-bottom">Your Savings Goals Status</h3>
+      </div>
+
+      <div class="savingsGoals">
+        <div class="goals">
+          <h3>Group Team Red</h3>
+          <h3><span id="amount">$200</span> for Advance Credit Card Payment</h3>
+          <div id="donut1" data-donut="42">
+          </div>
+        </div>
+        <div class="goals">
+          <h3>Group Team Green</h3>
+          <h3><span id="amount">$1000</span> for Daughter's Spring Tuition</h3>
+          <div id="donut2" data-donut="30">
+          </div>
+        </div>
+        <div class="goals">
+          <h3>Group Team Blue</h3>
+          <h3><span id="amount">$100</span> for New Cellphone Replacement</h3>
+          <div id="donut3" data-donut="80">
+          </div>
+        </div>
       </div>
     </div>
-    <div class="goals">
-      <h3>Group Team Green</h3>
-      <h3>$1000 for Daughter's Spring Tuition</h3>
-      <div id="donut2" data-donut="30">
+
+    <div id="your-clubs-section">
+      <div id="section-title">
+        <h3 class="brand-text-color border-bottom">Groups Information</h3>
+      </div>
+
+      <div class="savingsGoals">
+        <div id="pieChart"></div>
+      </div>
+
+      <div id="table">
+        <h4 class="table-title">Savings Clubs</h4>
+
+        <table class="reference" style="width: 100%">
+          <thead>
+            <tr class="brand-text-color">
+              <th>Group Name</th>
+              <th>Total Members</th>
+              <th>Rounds Remaining</th>
+              <th>Payment Amount</th>
+              <th>Payout Amount</th>
+              <th>Funds Received?</th>
+              <th>Payment Due Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @savings.each do |group| %>
+            <tr>
+              <td class="club-name"><a href="/groups/<%= group.id %>"><%= group.name %></a></td>
+              <td><%= group.users.count %></td>
+              <td><%= group.rounds_remaining %></td>
+              <td><%= group.payment_amount %></td>
+              <td><%= group.disbursement_amount %></td>
+              <td><%= @user.paid?(group.id) %></td>
+              <td><%= group.payment_date + 15 %></td>
+              <td>
+                <% if @user.transactions.where(group_id: group.id, transaction_type: "debit").last == nil || @user.transactions.where(group_id: group.id, transaction_type: "debit").last.created_at.mday != Time.now.getutc.mday %>
+                  <form action="/users/<%= @user.id %>/makepayment?group=<%= group.id %>" method="post">
+                    <input type="submit" value="Pay" class="pay paid">
+                  </form>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="table">
+        <h4 class="table-title">Credit Clubs</h4>
+
+        <table class="reference" style="width:100%">
+          <thead>
+            <tr class="categories">
+              <th>Group Name</th>
+              <th>Total Members</th>
+              <th>Rounds Occured</th>
+              <th>Payment Amount</th>
+              <th>Interest Rate</th>
+              <th>Interest Earned</th>
+              <th>Next Payout Date</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          <% @credit.each do |group| %>
+            <tr>
+              <td class="club-name"><a href="/groups/<%= group.id %>"><%= group.name %></a></td>
+              <td><%= group.users.count %></td>
+              <td><%= rand(0..group.users.count) %></td>
+              <td><%= group.payment_amount %></td>
+              <td><%= @rando_interest_rate %></td>
+              <td><%= group.payment_amount * @rando_interest_rate %></td>
+              <td><%= group.disbursement_date %></td>
+              <td>
+                <% if @user.transactions.where(group_id: group.id, transaction_type: "debit").last == nil || @user.transactions.where(group_id: group.id, transaction_type: "debit").last.created_at.mday != Time.now.getutc.mday %>
+                  <form action="/users/<%= @user.id %>/makepayment?group=<%= group.id %>" method="post">
+                    <input type="submit" value="Pay" class="pay">
+                  </form>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      </div>
+
+      <br>
+      <button class="button" id="new-club"><%= link_to "Create New Club", new_group_path %></button>
       </div>
     </div>
-    <div class="goals">
-      <h3>Group Team Blue</h3>
-      <h3>$100 for Cellphone Replacement</h3>
-      <div id="donut3" data-donut="80">
-      </div>
-    </div>
-  </div>
-
-  <div id="section-title">
-    <h3 class="brand-text-color border-bottom">Groups Information</h3>
-  </div>
-
-  <div id="pieChart"></div>
-
-  <div id="table">
-    <h4 class="table-title">Savings Clubs</h4>
-
-    <table class="reference" style="width: 100%">
-      <thead>
-        <tr class="brand-text-color">
-          <th>Group Name</th>
-          <th>Total Members</th>
-          <th>Rounds Remaining</th>
-          <th>Payment Amount</th>
-          <th>Payout Amount</th>
-          <th>Funds Received?</th>
-          <th>Payment Due Date</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @savings.each do |group| %>
-        <tr>
-          <td class="club-name"><a href="/groups/<%= group.id %>"><%= group.name %></a></td>
-          <td><%= group.users.count %></td>
-          <td><%= group.rounds_remaining %></td>
-          <td><%= group.payment_amount %></td>
-          <td><%= group.disbursement_amount %></td>
-          <td><%= @user.paid?(group.id) %></td>
-          <td><%= group.payment_date + 15 %></td>
-          <td>
-            <% if @user.transactions.where(group_id: group.id, transaction_type: "debit").last == nil || @user.transactions.where(group_id: group.id, transaction_type: "debit").last.created_at.mday != Time.now.getutc.mday %>
-              <form action="/users/<%= @user.id %>/makepayment?group=<%= group.id %>" method="post">
-                <input type="submit" value="Pay" class="pay paid">
-              </form>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-
-  <div id="table">
-    <h4 class="table-title">Credit Clubs</h4>
-
-    <table class="reference" style="width:100%">
-      <thead>
-        <tr class="categories">
-          <th>Group Name</th>
-          <th>Total Members</th>
-          <th>Rounds Occured</th>
-          <th>Payment Amount</th>
-          <th>Interest Rate</th>
-          <th>Interest Earned</th>
-          <th>Next Payout Date</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-      <% @credit.each do |group| %>
-        <tr>
-          <td class="club-name"><a href="/groups/<%= group.id %>"><%= group.name %></a></td>
-          <td><%= group.users.count %></td>
-          <td><%= rand(0..group.users.count) %></td>
-          <td><%= group.payment_amount %></td>
-          <td><%= @rando_interest_rate %></td>
-          <td><%= group.payment_amount * @rando_interest_rate %></td>
-          <td><%= group.disbursement_date %></td>
-          <td>
-            <% if @user.transactions.where(group_id: group.id, transaction_type: "debit").last == nil || @user.transactions.where(group_id: group.id, transaction_type: "debit").last.created_at.mday != Time.now.getutc.mday %>
-              <form action="/users/<%= @user.id %>/makepayment?group=<%= group.id %>" method="post">
-                <input type="submit" value="Pay" class="pay">
-              </form>
-            <% end %>
-          </td>
-        </tr>
-      <% end %>
-      </tbody>
-    </table>
-  </div>
-
-  <br>
-  <button><%= link_to "Create New Club", new_group_path %></button>
   </div>
 </div>
 
@@ -177,20 +298,20 @@ var pie = new d3pie("pieChart", {
     "title": {
       "text": "Your Total Savings Club Contributions",
       "fontSize": 24,
-      "font": "open sans"
+      "font": "Lato-Regular"
     },
     "subtitle": {
       "text": "% by savings/credit groups",
       "color": "#999999",
       "fontSize": 12,
-      "font": "open sans"
+      "font": "Lato-Regular"
     },
     "titleSubtitlePadding": 9
   },
   "footer": {
     "color": "#999999",
     "fontSize": 10,
-    "font": "open sans",
+    "font": "Lato-Regular",
     "location": "bottom-left"
   },
   "size": {
