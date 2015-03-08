@@ -1,0 +1,26 @@
+<h1>Add Members to Your <%= @group.name %> Group by Their User ID</h1>
+
+<div class="row">
+    <form action="/groups/<%= @group.id %>/addmembers" method="post">
+        <ul id="membersList">
+            <li><input name="member1" type="email" placeholder="mail@mail.com"></li><br>
+            <li><input name="member2" type="email" placeholder="mail@mail.com"></li><br>
+            <li><input name="member3" type="email" placeholder="mail@mail.com"></li><br>
+            <li><input name="member4" type="email" placeholder="mail@mail.com"></li><br>
+        </ul>
+        <input type="submit" value="Submit Members">
+    </form>
+</div>
+
+<div id="right_side">
+    <button id="addMember">+ Add Members</button>
+</div>
+
+<script>
+    var idNum = 4
+    $('#addMember').click(function(e){
+        idNum += 1
+        var listOfMembers = $("#membersList");
+        listOfMembers.append("<li><input name= " + "member" + idNum + " type='email' placeholder='additional member email'>" + "</li><br>")
+    })
+</script>
