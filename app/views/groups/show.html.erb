@@ -18,7 +18,7 @@
 <% @group.users.each do |user| %>
 <tr>
     <td><%= user.first_name %></td>
-    <td><%= user.last_contribution.created_at %></td>
+    <td><%= user.last_contribution.created_at.strftime('%a %d %b %Y') %></td>
     <td><%= user.paid?(@group.id) %></td>
 
 </tr>
