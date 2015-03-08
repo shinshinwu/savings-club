@@ -2,27 +2,39 @@
 <ul>
   <li>Group: <%= @group.name %></li>
   <li>Group Type: <%= @group.group_type %></li>
-  <li>Payment Amount per Month: <%= @group.payment_amount %></li>
-  <li>Payout Amount per Month: <%= @group.disbursement_amount %></li>
-  <li>Next Payout Date:  <%= @group.disbursement_date %></li>
 </ul>
-<table>
-<thead>
-<tr>
-    <th>Members</th>
-    <th>Last Contribution Made On:</th>
-    <th>Paid?</th>
-</tr>
-</thead>
-<tbody>
-<% @group.users.each do |user| %>
-<tr>
-    <td><%= user.first_name %></td>
-    <td><%= user.last_contribution.created_at.strftime('%a %d %b %Y') %></td>
-    <td><%= user.paid?(@group.id) %></td>
+<div id="content">
+  <div id="container">
+    <ul>
+      <li>Payment Amount per Month: <%= @group.payment_amount %></li>
+      <li>Payout Amount per Month: <%= @group.disbursement_amount %></li>
+      <li>Next Payout Date:  <%= @group.disbursement_date %></li>
+    </ul>
 
-</tr>
-<% end %>
-</tbody>
+    <div id="table">
+      <h4 class="table-title">Member's Info</h4>
 
-</table>
+      <table class="reference" style="width: 100%">
+        <thead>
+          <tr class="brand-text-color">
+              <th>Members</th>
+              <th>Last Contribution Made On:</th>
+              <th>Paid?</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @group.users.each do |user| %>
+          <tr>
+              <td class="club-name"><%= user.first_name %></td>
+              <td><%= user.last_contribution.created_at.strftime('%a %d %b %Y') %></td>
+              <td><%= user.paid?(@group.id) %></td>
+
+          </tr>
+          <% end %>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>
