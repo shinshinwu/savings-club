@@ -7,7 +7,6 @@ class GroupsController < ApplicationController
     @group = Group.new(group_params)
     if @group.save
       @group.update(disbursement_date: @group.payment_date + 25)
-      flash[:success] = "New Group #{@group.name} created!"
       render 'new_members'
     else
       render 'new'
