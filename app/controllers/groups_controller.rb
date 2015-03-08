@@ -25,8 +25,8 @@ class GroupsController < ApplicationController
     params.keys.each do |key|
       if key.include?('member')
         p "I got called"
-        p params[key].to_i
-        UserGroup.create(group_id: @group.id, user_id: params[key].to_i, paid: false)
+        p params[key]
+        UserGroup.create(group_id: @group.id, user_id: User.find_by(email: params[key]).id, paid: false)
       end
     end
     @group.update(disbursement_amount: @group.users.count * @group.payment_amount)

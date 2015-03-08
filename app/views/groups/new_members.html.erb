@@ -3,10 +3,10 @@
 <div class="row">
     <form action="/groups/<%= @group.id %>/addmembers" method="post">
         <ul id="membersList">
-            <li><input name="member1" type="number" placeholder="1"></li><br>
-            <li><input name="member2" type="number" placeholder="2"></li><br>
-            <li><input name="member3" type="number" placeholder="3"></li><br>
-            <li><input name="member4" type="number" placeholder="4"></li><br>
+            <li><input name="member1" type="email" placeholder="mail@mail.com"></li><br>
+            <li><input name="member2" type="email" placeholder="mail@mail.com"></li><br>
+            <li><input name="member3" type="email" placeholder="mail@mail.com"></li><br>
+            <li><input name="member4" type="email" placeholder="mail@mail.com"></li><br>
         </ul>
         <input type="submit" value="Submit Members">
     </form>
@@ -21,6 +21,6 @@
     $('#addMember').click(function(e){
         idNum += 1
         var listOfMembers = $("#membersList");
-        listOfMembers.append("<li><input name= " + "member" + idNum + " type='number' placeholder='additional member id'>" + "</li><br>")
+        listOfMembers.append("<li><input name= " + "member" + idNum + " type='email' placeholder='additional member email'>" + "</li><br>")
     })
 </script>
