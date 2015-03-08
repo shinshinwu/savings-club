@@ -1,0 +1,21 @@
+<p>Group: <%= @group.name %> </p>
+<p>Group Type: <%= @group.group_type %> </p>
+<p>Payment Amount per month: <%= @group.payment_amount %></p>
+      
+<p>Payout Amount per month  <%= @group.disbursement_amount%></p>
+
+<table>
+<tr>
+	<th>Members</th>
+	<th>Last Payment Date</th>
+	<th>Payment Amount?</th>
+</tr>
+<td>
+<%= User.first_name %>
+<%= Groups.payment_amount %>
+<%= Groups.disbursement_amount %>
+
+</td>
+
+
+</table>

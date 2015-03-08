@@ -14,3 +14,16 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+
+require 'nexmo'
+
+nexmo = Nexmo::Client.new(key: 'ec19c1ba', secret: 'ba674a8a')
+
+
+  $('#nextmo').click( function(e) {
+    (e).preventDefault();
+
+
+   
+nexmo.send_message(from: 'Ruby', to: 'YOUR NUMBER', text: 'Hello world')
