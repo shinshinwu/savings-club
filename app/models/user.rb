@@ -13,6 +13,6 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
 
   def paid?(group_id)
-    return UserGroup.where(user_id: self.id, group_id: group_id).first.paid
+    return UserGroup.find_by(user_id: self.id, group_id: group_id).paid
   end
 end
