@@ -7,7 +7,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    #user profile page that shows questions, resources and answers mapped to user
+    #user profile page that shows questions
     @user = User.find(params[:id])
     @last_contribution = @user.transactions.where(transaction_type: "debit").last
     @last_contribution_group = Group.find(@last_contribution.group_id)

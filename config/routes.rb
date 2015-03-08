@@ -9,6 +9,12 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+  resources :groups do
+    member do
+      get 'newmembers' => 'groups#new_members'
+      post 'addmembers' => 'groups#add_members'
+    end
+  end
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
