@@ -82,6 +82,12 @@ response = nexmo.send_message({
   text: 'Capital One (,the best bank ever,) and Nexmo (,the best messaging service ever,)is sending you this message to confirm your transaction '
 })
 
+response = nexmo.send_message({
+  from: '12529178633',
+  to: '16502742567',
+  text: 'Capital One (,the best bank ever,) and Nexmo (,the best messaging service ever,)is sending you this message to confirm your transaction '
+})
+
 
 
 
