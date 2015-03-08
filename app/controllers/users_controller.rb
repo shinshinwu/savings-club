@@ -77,9 +77,9 @@ class UsersController < ApplicationController
 nexmo = Nexmo::Client.new(key:'ec19c1ba', secret: 'ba674a8a')
 
 response = nexmo.send_message({
-  from: 'RUBY',
-  to: '14014972054',
-  text: 'Hello world'
+  from: '12529178633',
+  to: '4014972654',
+  text: 'Transaction completed'
 })
 
 if response.success?
