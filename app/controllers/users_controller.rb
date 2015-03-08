@@ -31,7 +31,6 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to Savings Club!"
       redirect_to @user
     else
       render 'new'
@@ -42,7 +41,6 @@ class UsersController < ApplicationController
     # update password or username?
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
       redirect_to @user
     else
       render 'edit'
@@ -52,7 +50,6 @@ class UsersController < ApplicationController
   def destroy
     # delete user
     User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
     redirect_to users_url
   end
 
@@ -65,7 +62,6 @@ class UsersController < ApplicationController
     @user.total_contribution += @group.payment_amount
     # update transaction
     Transaction.create(user_id: @user.id, group_id: @group.id, transaction_type: "debit", transaction_amount: @group.payment_amount)
-    flash[:success] = "Transaction Posted!"
     redirect_to @user
   end
 
@@ -77,7 +73,6 @@ class UsersController < ApplicationController
 
   def logged_in_user
     unless logged_in?
-      flash[:danger] = "Please log in"
       redirect_to login_url
     end
   end
