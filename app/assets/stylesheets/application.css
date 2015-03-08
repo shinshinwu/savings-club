@@ -13,3 +13,265 @@
  *= require_tree .
  *= require_self
  */
+
+@charset "UTF-8";
+/* CSS Document */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #E7EBEE;
+  font-family: Lato-Regular, Arial, sans-serif;
+}
+
+.landing {
+  background: #88BC3D;
+}
+
+header {
+  background: #FFFFFF;
+  padding: 1em 0;
+}
+
+#container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  /*padding: 1em 0*/;
+}
+
+.brand-text-color {
+  color: #88BC3D;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #88BC3D;
+}
+
+.brand {
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+}
+
+.brand-icon {
+  float: left;
+  width: auto;
+  margin-right: 5%;
+}
+
+.brand-name {
+  line-height: 1.25em;
+    margin: 0.6em 0 0;
+}
+
+.brand-name h2 {
+  letter-spacing: 0.20em;
+  color: #363734;
+}
+
+h2 {
+  font-family: Lato-Black, Arial, sans-serif;
+}
+
+h3 {
+  font-family: Lato-Bold, Arial, sans-serif;
+  font-size: 1.08em;
+    font-weight: 600;
+    padding: 0.6em 0;
+}
+
+.slogan {
+  color: #88bc3d;
+    font-family: Lato-Light,Arial,sans-serif;
+    font-size: 0.66em;
+    font-style: italic;
+    letter-spacing: 0.18em;
+}
+
+nav {
+  float: right;
+  font-family: Lato-Black, Arial, sans-serif;
+  font-weight: 300;
+}
+
+ul, li {
+  text-decoration: none;
+  list-style: none;
+  float: left;
+}
+
+header nav ul {
+  float: left;
+  list-style: none;
+  text-align: center;
+  padding: 0;
+  margin: 0.35em 0 0 0;
+}
+
+header nav ul li {
+  margin: 1em 1.65em;
+}
+
+nav a {
+  text-decoration: none;
+  color: #363734;
+  display: block;
+}
+
+/*.button {
+  border: 3px solid #88BC3d;
+    -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+    margin: 0;
+    padding: 0.7em 1.8em;
+}*/
+
+.button {
+    border: 3px solid #88bc3d;
+    -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+    margin: 0;
+    padding: 0.7em 0;
+    width: 7em;
+}
+
+nav ul li.button a {
+  color: #88BC3D;
+}
+
+#main-content {
+  color: #FFFFFF;
+  text-align: center;
+}
+
+#intro-text {
+  margin: 4em auto;
+  max-width: 880px;
+  line-height: 2em;
+}
+
+#main-content p {
+  font-size: 1.45em;
+  margin-top: 1em;
+}
+
+#table {
+  margin: 1.5em 0;
+}
+
+.table-title {
+    font-weight: 100;
+    letter-spacing: 0.04em;
+    margin: 0 1em 0.85em;
+  color: #999999;
+}
+
+table {
+  width: 100%;
+  background: #FFFFFF;
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+table.reference {
+    max-width: 100%;
+    width: 100%;
+}
+
+table.reference > thead > tr > th, table.reference > tbody > tr > th, table.reference > tfoot > tr > th, table.reference > thead > tr > td, table.reference > tbody > tr > td, table.reference > tfoot > tr > td {
+    line-height: 1.42857;
+    padding: 1em;
+    vertical-align: top;
+}
+th {
+    text-align: left;
+}
+td, th {
+    padding: 0;
+}
+
+.categories {
+  color: #88BC3D;
+}
+
+table.reference tr:nth-child(2n+1) {
+    background-color: #FFFFFF;
+}
+
+table.reference tr:nth-child(2n) {
+    background-color: #F9F9F9;
+}
+
+.club-name {
+  font-family: Lato-Bold, Arial, sans-serif;
+  font-weight: 300;
+}
+
+.pay {
+  background: #88BC3D;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  border-radius: 6px;
+    margin: 0;
+    padding: 0.2em 0;
+    width: 4em;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.paid {
+  background: #E7EBEE;
+}
+
+#data {
+  background: #FFFFFF;
+  height: auto;
+  width: 100%;
+}
+
+#row {
+    box-sizing: padding-box;
+    height: auto;
+    padding: 1em;
+    width: 100%;
+  border-bottom: 1px solid #E7EBEE;
+}
+
+.column1 {
+  max-width: 150px;
+  width: 100%;
+}
+
+.fltrt {
+  float: right;
+}
+
+
+/*****   IMPORT FONT   *****/
+
+@font-face {
+  font-family: Lato-Black;
+  src: url(../fonts/Lato/Lato-Black.ttf);
+}
+
+@font-face {
+  font-family: Lato-Bold;
+  src: url(../fonts/Lato/Lato-Bold.ttf);
+}
+
+@font-face {
+  font-family: Lato-Regular;
+  src: url(../fonts/Lato/Lato-Regular.ttf);
+}
+
+@font-face {
+  font-family: Lato-Light;
+  src: url(../fonts/Lato/Lato-Italic.ttf);
+}
