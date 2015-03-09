@@ -64,7 +64,7 @@ path.color1 {
 
         <div id="user-content">
 
-          <div id="avatar">
+          <div id="avatar" class="user-avatar">
           </div>
 
           <div id="user-info">
@@ -204,7 +204,7 @@ path.color1 {
       </div>
 
       <div id="table">
-        <h4 class="table-title">Savings Clubs</h4>
+        <h4 class="table-title">Savings Groups</h4>
 
         <table class="reference" style="width: 100%">
           <thead>
@@ -228,11 +228,11 @@ path.color1 {
               <td><%= group.payment_amount %></td>
               <td><%= group.disbursement_amount %></td>
               <td><%= @user.paid?(group.id) %></td>
-              <td><%= group.payment_date + 15 %></td>
+              <td><%= group.payment_date + 33 %></td>
               <td>
                 <% if @user.transactions.where(group_id: group.id, transaction_type: "debit").last == nil || @user.transactions.where(group_id: group.id, transaction_type: "debit").last.created_at.mday != Time.now.getutc.mday %>
                   <form action="/users/<%= @user.id %>/makepayment?group=<%= group.id %>" method="post">
-                    <input type="submit" value="Pay" class="pay paid">
+                    <input type="submit" value="Pay" class="pay">
                   </form>
                 <% end %>
               </td>
@@ -243,7 +243,7 @@ path.color1 {
       </div>
 
       <div id="table">
-        <h4 class="table-title">Credit Clubs</h4>
+        <h4 class="table-title">Lending Groups</h4>
 
         <table class="reference" style="width:100%">
           <thead>
@@ -261,7 +261,7 @@ path.color1 {
           <tbody>
           <% @credit.each do |group| %>
             <tr>
-              <td class="club-name"><a href="/groups/<%= group.id %>"><%= group.name %></a></td>
+              <td class="club-name"><a href="/credit-club.html"><%= group.name %></a></td>
               <td><%= group.users.count %></td>
               <td><%= rand(0..group.users.count) %></td>
               <td><%= group.payment_amount %></td>
@@ -282,7 +282,7 @@ path.color1 {
       </div>
 
       <br>
-      <button class="button" id="new-club"><%= link_to "Create New Club", new_group_path %></button>
+      <button class="button" id="new-club"><%= link_to "Create New Group", new_group_path %></button>
       </div>
     </div>
   </div>

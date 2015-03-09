@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
 gem 'bcrypt'
+gem 'nexmos'
+gem 'nexmo'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -43,6 +45,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'pry-rails'
   gem 'rspec-rails'
+  gem 'faker'
 end
 
 group :production do
@@ -52,7 +55,6 @@ end
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'faker'
   gem 'launchy'
   gem 'poltergeist'
   gem 'selenium-webdriver'

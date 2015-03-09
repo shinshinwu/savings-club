@@ -1,28 +1,82 @@
-<h1>Sign Up</h1>
+<div id="content">
 
-<div class="row">
-  <%= form_for(@user) do |f| %>
 
-    <%= render 'shared/error_messages' %>
+    <div id="container">
 
-    <%= f.label :first_name, 'First Name' %>
-    <%= f.text_field :first_name, placeholder: 'Clark' %>
 
-    <%= f.label :last_name, 'Last Name' %>
-    <%= f.text_field :last_name, placeholder: 'Kent' %>
+        <div id="table" class="account-info">
+            <h4 class="table-title">Personal Info</h4>
+            <div id="data">
+                <div id="row">
+                    <div class="column1">
+                    <p>Full Name</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="input-text-field form-input-name grayed-out">
 
-    <%= f.label :email, 'Email' %>
-    <%= f.email_field :email, placeholder: 'clarkkent@gmail.com' %>
+                    </div>
+                </div>
+                <div id="row">
+                    <div class="column1">
+                    <p>Email</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="input-text-field form-input-email grayed-out">
 
-    <%= f.label :password, 'Password' %>
-    <%= f.password_field :password, placeholder: 'Secure Password more than 6 characters' %>
+                    </div>
+                </div>
+                <div id="row">
+                    <div class="column1">
+                    <p>Password</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="input-text-field form-input-password grayed-out">
 
-    <%= f.label :account_name, 'Bank Institution Name' %>
-    <%= f.text_field :account_name, placeholder: 'Bank of America' %>
+                    </div>
+                </div>
 
-    <%= f.label :account_number, 'Bank Account Number' %>
-    <%= f.number_field :account_number, placeholder: '111XXXXXXX' %>
+        </div><!-- end #data -->
+        </div><!-- end #table .account-info -->
 
-    <%= f.submit "Create my account" %>
-  <% end %>
+        <div id="table" class="activity-info">
+            <h4 class="table-title">Bank Account Info</h4>
+            <div id="data">
+                <div id="row">
+                    <div class="column1">
+                    <p>Bank Name</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="input-text-field form-input-bank-name grayed-out">
+                    </div>
+                </div>
+                <div id="row">
+                    <div class="column1">
+                    <p>ACCT#</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="input-text-field form-input-acctnum grayed-out">
+                    </div>
+                </div>
+                <div id="row">
+                    <div class="column1">
+                    <p>Type of Account?</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="input-text-field form-input-type-accnt grayed-out">
+                    </div>
+                </div>
+                <div id="submit-row">
+                    <div class="submit-row">
+                        <div id="submit-button">Submit</div><!-- end #submit-button -->
+                    </div>
+                </div>
+        </div><!-- end #data -->
+        </div><!-- end #table .activity-info -->
+
+
+
+
+
+
+    </div><!-- end #container -->
 </div>
