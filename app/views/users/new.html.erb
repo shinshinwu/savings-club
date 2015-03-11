@@ -1,82 +1,60 @@
 <div id="content">
-
-
     <div id="container">
 
-
         <div id="table" class="account-info">
-            <h4 class="table-title">Personal Info</h4>
+            <h4 class="table-title">Sign Up</h4>
+
             <div id="data">
-                <div id="row">
-                    <div class="column1">
-                    <p>Full Name</p>
-                    </div>
-                    <div class="fltrt">:</div>
-                    <div class="input-text-field form-input-name grayed-out">
+              <%= form_for(@user) do |f| %>
 
-                    </div>
+              <div id="row">
+                <div class="column1">
+                    <p><%= f.label :first_name, 'First Name' %></p>
                 </div>
-                <div id="row">
-                    <div class="column1">
-                    <p>Email</p>
-                    </div>
-                    <div class="fltrt">:</div>
-                    <div class="input-text-field form-input-email grayed-out">
+                <%= f.text_field :first_name, placeholder: 'Clark' %>
+            </div>
 
-                    </div>
+            <div id="row">
+                <div class="column1">
+                    <p><%= f.label :last_name, 'Last Name' %></p>
                 </div>
-                <div id="row">
-                    <div class="column1">
-                    <p>Password</p>
-                    </div>
-                    <div class="fltrt">:</div>
-                    <div class="input-text-field form-input-password grayed-out">
-
-                    </div>
+                <%= f.text_field :last_name, placeholder: 'Kent' %>
+            </div>
+            <div id="row">
+                <div class="column1">
+                    <p><%= f.label :email, 'Email' %></p>
                 </div>
+                <%= f.email_field :email, placeholder: 'clarkkent@gmail.com' %>
+            </div>
 
-        </div><!-- end #data -->
-        </div><!-- end #table .account-info -->
-
-        <div id="table" class="activity-info">
-            <h4 class="table-title">Bank Account Info</h4>
-            <div id="data">
-                <div id="row">
-                    <div class="column1">
-                    <p>Bank Name</p>
-                    </div>
-                    <div class="fltrt">:</div>
-                    <div class="input-text-field form-input-bank-name grayed-out">
-                    </div>
+            <div id="row">
+                <div class="column1">
+                    <p><%= f.label :password, 'Password' %></p>
                 </div>
-                <div id="row">
-                    <div class="column1">
-                    <p>ACCT#</p>
-                    </div>
-                    <div class="fltrt">:</div>
-                    <div class="input-text-field form-input-acctnum grayed-out">
-                    </div>
+                <%= f.password_field :password, placeholder: 'Secure Password more than 6 characters' %>
+            </div>
+
+            <div id="row">
+                <div class="column1">
+                    <p><%= f.label :account_name, 'Bank Institution Name' %></p>
                 </div>
-                <div id="row">
-                    <div class="column1">
-                    <p>Type of Account?</p>
-                    </div>
-                    <div class="fltrt">:</div>
-                    <div class="input-text-field form-input-type-accnt grayed-out">
-                    </div>
+                <%= f.text_field :account_name, placeholder: 'Bank of America' %>
+            </div>
+
+            <div id="row">
+                <div class="column1">
+                    <p><%= f.label :account_number, 'Bank Account Number' %></p>
                 </div>
-                <div id="submit-row">
-                    <div class="submit-row">
-                        <div id="submit-button">Submit</div><!-- end #submit-button -->
-                    </div>
+                <%= f.number_field :account_number, placeholder: '111XXXXXXX' %>
+            </div>
+
+            <div id="submit-row">
+                <div class="submit-row">
+                <%= f.submit "Create", id: "submit-button" %>
                 </div>
-        </div><!-- end #data -->
-        </div><!-- end #table .activity-info -->
-
-
-
-
-
-
-    </div><!-- end #container -->
+            </div>
+              <% end %>
+            </div>
+        </div>
+    </div>
 </div>

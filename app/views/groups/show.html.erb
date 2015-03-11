@@ -51,11 +51,11 @@
                 </div>
                 <div id="row">
                   <div class="column1">
-                  <p>Last Payout Date</p>
+                  <p>Next Payout Date</p>
                     </div>
                     <div class="fltrt">:</div>
                     <div class="column2 form-input">
-                  <p><%= @group.disbursement_date %></p>
+                  <p><%= @group.disbursement_date.strftime('%a %d %b %Y') %></p>
                     </div>
                 </div>
                 <div id="row">
@@ -87,7 +87,7 @@
               <tr>
                   <td class="club-name"><%= user.first_name %></td>
                   <td><%= user.last_contribution.created_at.strftime('%a %d %b %Y') %></td>
-                  <td><%= user.paid?(@group.id) %></td>
+                  <td><%= user.paid?(@group.id).to_s.capitalize %></td>
 
               </tr>
               <% end %>

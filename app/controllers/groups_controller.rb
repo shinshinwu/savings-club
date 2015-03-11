@@ -23,8 +23,6 @@ class GroupsController < ApplicationController
     @group = Group.find(params[:id])
     params.keys.each do |key|
       if key.include?('member')
-        p "I got called"
-        p params[key]
         UserGroup.create(group_id: @group.id, user_id: User.find_by(email: params[key]).id, paid: false)
       end
     end

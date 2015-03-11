@@ -18,6 +18,11 @@
 /* CSS Document */
 
 /*custome css*/
+
+form {
+  background-color: white;
+}
+
 nav .button {
   margin-top: -0.7em;
 }
@@ -55,9 +60,12 @@ button a {
 }
 
 #contain {
- width: 100%;
- margin: 0 auto;
  background-color: white;
+}
+
+#pic-holder img {
+  display: block;
+  margin: 0 auto;
 }
 
 
@@ -72,10 +80,10 @@ button a {
 
 #intro-text {
   padding-top: 1em;
- margin: 4em auto;
- max-width: 880px;
- line-height: 2em;
- color: white;
+  margin: 4em auto;
+  max-width: 880px;
+  line-height: 2em;
+  color: white;
 }
 
 .how-text {
@@ -94,12 +102,6 @@ button a {
  text-align: center;
  padding-top: 3em;
  color: white;
-}
-
-#pic-holder {
-  margin: 0 auto;
-  display: block;
-  padding-left: 33%;
 }
 
 /*----------------------------*/

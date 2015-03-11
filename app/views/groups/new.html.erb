@@ -1,55 +1,56 @@
 <div id="content">
-
-
     <div id="container">
 
         <div id="table" class="activity-info">
-            <h4 class="table-title">Create New Club : Step 1 of 2</h4>
+
+            <h4 class="table-title">Create New Group : Step 1 of 2</h4>
+
+                  <%= form_for(@group) do |f| %>
             <div id="data">
+
                 <div id="row">
                     <div class="column1">
-                    <p>Club Name</p>
+                        <p><%= f.label :name, 'Group Name' %></p>
                     </div>
-                    <div class="fltrt">:</div>
-                    <div class="input-text-field form-input-club-name grayed-out">
-                    </div>
+
+                    <%= f.text_field :name, placeholder: 'Awesome Group Name' %>
                 </div>
+
                 <div id="row">
                     <div class="column1">
-                    <p>Club Type</p>
+                        <p><%= f.label :group_type, 'Group Type' %></p>
                     </div>
-                    <div class="fltrt">:</div>
-                    <div class="input-text-field form-input-club-type grayed-out">
-                    </div>
+                    <%= f.radio_button :group_type, 'Savings' %>
+                    <%= f.label :group_type, 'Savings', :value => 'savings' %>
+                    <%= f.radio_button :group_type, 'Credit' %>
+                    <%= f.label :group_type, 'Credit', :value => 'credit' %>
                 </div>
+
                 <div id="row">
+
                     <div class="column1">
-                    <p>Monthly Payment Amount</p>
+                        <p><%= f.label :payment_date, 'Payment Date' %></p>
                     </div>
-                    <div class="fltrt">:</div>
-                    <div class="input-text-field form-input-payment-amnt grayed-out">
-                    </div>
+                    <%= f.date_field :payment_date %>
                 </div>
+
                 <div id="row">
+
                     <div class="column1">
-                    <p>Monthly Payout Date</p>
+                        <p><%= f.label :payment_amount, 'Monthly Payment Amount $' %></p>
                     </div>
-                    <div class="fltrt">:</div>
-                    <div class="input-text-field form-input-date grayed-out">
-                    </div>
+                    <%= f.number_field :payment_amount, placeholder: 50 %>
                 </div>
-                <div id="submit-row">
-                    <div class="submit-row">
-                        <div id="submit-button">Next Step</div><!-- end #submit-button -->
+
+                    <div id="submit-row">
+                        <div class="submit-row">
+                            <%= f.submit "Next Step", id: "submit-button" %>
+                        </div>
                     </div>
+              </div>
+                  <% end %>
                 </div>
-        </div><!-- end #data -->
-        </div><!-- end #table .activity-info -->
-
-
-
-
-
-
-    </div><!-- end #container -->
+            </div>
+        </div>
+    </div>
 </div>

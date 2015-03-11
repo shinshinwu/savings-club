@@ -139,7 +139,7 @@ path.color1 {
                 </div>
                 <div id="row">
                   <div class="column1">
-                  <p>Last Amount Contributed to All Clubs</p>
+                  <p>Last Amount Contributed to All Groups</p>
                     </div>
                     <div class="fltrt">:</div>
                     <div class="column2 form-input">
@@ -152,12 +152,12 @@ path.color1 {
                     </div>
                     <div class="fltrt">:</div>
                     <div class="column2 form-input">
-                  <p>$<%= @user.last_disbursement.transaction_amount %> on <%= @user.last_disbursement.created_at.strftime('%a %d %b %Y') %> to Group <%= @last_disbursement_group.name %></p>
+                  <p>$<%= @user.last_disbursement.transaction_amount %> on <%= @user.last_disbursement.created_at.strftime('%a %d %b %Y') %> from Group <%= @last_disbursement_group.name %></p>
                     </div>
                 </div>
                 <div id="row">
                   <div class="column1">
-                  <p>Last Amount Received to All Clubs</p>
+                  <p>Last Amount Received from All Groups</p>
                     </div>
                     <div class="fltrt">:</div>
                     <div class="column2 form-input">
@@ -225,9 +225,9 @@ path.color1 {
               <td class="club-name"><a href="/groups/<%= group.id %>"><%= group.name %></a></td>
               <td><%= group.users.count %></td>
               <td><%= group.rounds_remaining %></td>
-              <td><%= group.payment_amount %></td>
-              <td><%= group.disbursement_amount %></td>
-              <td><%= @user.paid?(group.id) %></td>
+              <td>$<%= group.payment_amount %></td>
+              <td>$<%= group.disbursement_amount %></td>
+              <td><%= @user.paid?(group.id).to_s.capitalize %></td>
               <td><%= group.payment_date + 33 %></td>
               <td>
                 <% if @user.transactions.where(group_id: group.id, transaction_type: "debit").last == nil || @user.transactions.where(group_id: group.id, transaction_type: "debit").last.created_at.mday != Time.now.getutc.mday %>
@@ -264,9 +264,9 @@ path.color1 {
               <td class="club-name"><a href="/credit-club.html"><%= group.name %></a></td>
               <td><%= group.users.count %></td>
               <td><%= rand(0..group.users.count) %></td>
-              <td><%= group.payment_amount %></td>
-              <td><%= @rando_interest_rate %></td>
-              <td><%= group.payment_amount * @rando_interest_rate %></td>
+              <td>$<%= group.payment_amount %></td>
+              <td><%= @rando_interest_rate %>%</td>
+              <td>$<%= group.payment_amount * @rando_interest_rate %></td>
               <td><%= group.disbursement_date %></td>
               <td>
                 <% if @user.transactions.where(group_id: group.id, transaction_type: "debit").last == nil || @user.transactions.where(group_id: group.id, transaction_type: "debit").last.created_at.mday != Time.now.getutc.mday %>
@@ -296,7 +296,7 @@ a.textComponents.title.h=b.h,a.textComponents.title.w=b.w}if(a.textComponents.su
 var pie = new d3pie("pieChart", {
   "header": {
     "title": {
-      "text": "Your Total Savings Club Contributions",
+      "text": "Your KASHWE Contributions",
       "fontSize": 24,
       "font": "Lato-Regular"
     },
@@ -381,8 +381,8 @@ var pie = new d3pie("pieChart", {
 
 
 <script>
-var duration   = 500,
-    transition = 200;
+var duration   = 5000,
+    transition = 2500;
 
 drawDonutChart(
   '#donut1',

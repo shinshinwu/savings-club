@@ -64,20 +64,6 @@ class UsersController < ApplicationController
     # update transaction
     Transaction.create(user_id: @user.id, group_id: @group.id, transaction_type: "debit", transaction_amount: @group.payment_amount)
 
-    nexmo = Nexmo::Client.new(key:'ec19c1ba', secret: 'ba674a8a')
-
-    response = nexmo.send_message({
-      from: '12529178633',
-      to: '14014972654',
-      text: 'Transaction completed'
-    })
-
-    # if response.success?
-    #   puts "Sent message: #{response.message_id}"
-    # elsif response.failure?
-    #   raise response.error
-    # end
-
     redirect_to @user
   end
 
