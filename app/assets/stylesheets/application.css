@@ -18,6 +18,11 @@
 /* CSS Document */
 
 /*custome css*/
+
+form {
+  background-color: white;
+}
+
 nav .button {
   margin-top: -0.7em;
 }
@@ -42,6 +47,63 @@ button a {
   font-size: 1.5em;
 }
 
+.landing {
+ background: #88BC3D ;
+ font-family: Lato-Regular, Arial, sans-serif;
+}
+
+#container {
+ width: 100%;
+ max-width: 960px;
+ margin: 0 auto;
+ /*padding: 1em 0*/;
+}
+
+#contain {
+ background-color: white;
+}
+
+#pic-holder img {
+  display: block;
+  margin: 0 auto;
+}
+
+
+.landing {
+ background: #88BC3D ;
+}
+
+.main-content {
+ color: #FFFFFF ;
+ text-align: center;
+}
+
+#intro-text {
+  padding-top: 1em;
+  margin: 4em auto;
+  max-width: 880px;
+  line-height: 2em;
+  color: white;
+}
+
+.how-text {
+ max-width: 100%;
+ background: #E7EBEE ;
+ height: 10em;
+ text-align: center;
+ padding-top: 3em;
+ color: #88BC3D ;
+}
+
+.goal-text {
+ max-width: 100%;
+ background-color: #88BC3D ;
+ height: 10em;
+ text-align: center;
+ padding-top: 3em;
+ color: white;
+}
+
 /*----------------------------*/
 * {
   margin: 0;
@@ -55,7 +117,8 @@ body {
 }
 
 #landing {
-  background: #88BC3D;
+  background: url(../images/landing-image.png) top center no-repeat #88BC3D;
+  background-size: cover;
 }
 
 header {
@@ -73,6 +136,10 @@ header {
 
 .brand-text-color {
   color: #88BC3D;
+}
+
+.grayed-out {
+  color: #D4D8DB;
 }
 
 .border-top {
@@ -123,7 +190,7 @@ h3 {
     font-family: Lato-Light,Arial,sans-serif;
     font-size: 0.66em;
     font-style: italic;
-    letter-spacing: 0.18em;
+    letter-spacing: 0.10em;
 }
 
 nav {
@@ -150,8 +217,13 @@ header nav ul li {
   margin: 1em 1.65em;
 }
 
-header nav ul li a:active {
-  border-bottom: 4px solid #000000;
+header nav ul li a:hover {
+  color: #88BC3D;
+}
+
+.active {
+  border-bottom: 4px solid #88BC3D;
+  padding-bottom: 26px;
 }
 
 nav a {
@@ -179,9 +251,28 @@ nav a {
     width: 7em;
 }
 
+.active-button, .button.login:hover {
+  background: #88BC3D;
+  color: #FFFFFF;
+  border: 3px solid #88bc3d;
+    -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+    margin: 0;
+    padding: 0.7em 0;
+    width: 7em;
+}
+
+li.button.login a:hover {
+  color: #FFFFFF;
+}
 
 nav ul li.button a {
   color: #88BC3D;
+}
+
+nav ul li.active-button a, nav ul li.active-button a:hover {
+  color: #FFFFFF;
 }
 
 #main-content {
@@ -209,10 +300,19 @@ nav ul li.button a {
 #avatar {
   width: 100px;
   height: 100px;
-  background: url(../images/avatar.jpg) #E7EBEE center center no-repeat;
+  border: 4px solid #E7EBEE;
   border-radius: 100%;
-  background-size: 200px;
   display: inline-block;
+}
+
+.user-avatar {
+  background: url(../images/avatar.jpg) #E7EBEE center center no-repeat;
+  background-size: 200px;
+}
+
+.club-avatar {
+  background: url(../images/m-symbol.png) #E7EBEE center center no-repeat;
+  background-size: 100px;
 }
 
 #user-info {
@@ -221,6 +321,19 @@ nav ul li.button a {
 
 #table {
   margin: 1.5em 0;
+}
+
+.login-table {
+  width: 350px;
+  margin: 1.5em auto;
+}
+
+.login-title {
+  font-family: Lato-Black, Arial, sans-serif;
+  font-weight: 300;
+  text-align: center;
+  margin: 1.5em 0;
+  font-size: 1.5em;
 }
 
 .table-title {
@@ -311,6 +424,13 @@ table.reference tr:nth-child(2n) {
   letter-spacing: 0.06em
 }
 
+.input-text-field {
+  font-family: Lato-Regular, Arial, sans-serif;
+  display: inline-flex;
+  margin: 0 0 0 0.65em;
+  letter-spacing: 0.06em;
+}
+
 /*#data {
   background: #FFFFFF;
   height: auto;
@@ -319,6 +439,98 @@ table.reference tr:nth-child(2n) {
 
 
 */
+
+.form-input-name:before {
+  content: "eg. John Luther";
+}
+
+.form-input-email:before {
+  content: "eg. name@email.com";
+}
+
+.form-input-password:before {
+  content: "Minimum of 6 symbols";
+}
+
+.form-input-bank-name:before {
+  content: "eg. Capital One";
+}
+
+.form-input-acctnum:before {
+  content: "eg. 123456789123";
+}
+
+.form-input-type-accnt:before {
+  content: "eg. Checking";
+}
+
+.form-input-club-name:before {
+  content: "What's the club's name?";
+}
+
+.form-input-club-type:before {
+  content: "Savings or Credit?";
+}
+
+.form-input-payment-amnt:before {
+  content: "$00.00";
+}
+
+.form-input-date:before {
+  content: "eg. Every 5th of the Month";
+}
+
+.form-input-login-email:before {
+  content: "Email";
+}
+
+.form-input-login-password:before {
+  content: "Password";
+}
+
+
+
+#submit-row {
+  background: #FFFFFF;
+    box-sizing: padding-box;
+    height: auto;
+    padding: 1em;
+    width: 100%;
+  border-bottom: 1px solid #E7EBEE;
+  float: right;
+}
+
+.submit-row {
+  display: block;
+}
+
+#submit-button {
+  background: #0097DE;
+  text-align: center;
+  color: #FFFFFF;
+    -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+    margin: 0;
+    padding: 0.7em 0;
+    width: 7em;
+  display: block;
+  float: right;
+}
+
+#submit-button-inactive {
+  background: #b2e0f5;
+  text-align: center;
+  color: #FFFFFF;
+    -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+    margin: 0;
+    padding: 0.7em 0;
+    width: 7em;
+  display: block;
+  float: right;
+}
 
 .fltrt {
   float: right;

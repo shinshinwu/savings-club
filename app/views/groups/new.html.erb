@@ -1,23 +1,56 @@
-<h1>Create New Group</h1>
+<div id="content">
+    <div id="container">
 
-<div class="row">
-  <%= form_for(@group) do |f| %>
+        <div id="table" class="activity-info">
 
-    <%= f.label :name, 'Group Name' %>
-    <%= f.text_field :name, placeholder: 'Awesome Group Name' %>
+            <h4 class="table-title">Create New Group : Step 1 of 2</h4>
 
-    <%= f.label :group_type, 'Group Type' %>
-    <%= f.radio_button :group_type, 'Savings' %>
-    <%= f.label :group_type, 'Savings', :value => 'savings' %>
-    <%= f.radio_button :group_type, 'Credit' %>
-    <%= f.label :group_type, 'Credit', :value => 'credit' %>
+                  <%= form_for(@group) do |f| %>
+            <div id="data">
 
-    <%= f.label :payment_date, 'Payment Date' %>
-    <%= f.date_field :payment_date %>
+                <div id="row">
+                    <div class="column1">
+                        <p><%= f.label :name, 'Group Name' %></p>
+                    </div>
 
-    <%= f.label :payment_amount, 'Monthly Payment Amount $' %>
-    <%= f.number_field :payment_amount, placeholder: 50 %>
+                    <%= f.text_field :name, placeholder: 'Awesome Group Name' %>
+                </div>
 
-    <%= f.submit "Create My Group" %>
-  <% end %>
+                <div id="row">
+                    <div class="column1">
+                        <p><%= f.label :group_type, 'Group Type' %></p>
+                    </div>
+                    <%= f.radio_button :group_type, 'Savings' %>
+                    <%= f.label :group_type, 'Savings', :value => 'savings' %>
+                    <%= f.radio_button :group_type, 'Credit' %>
+                    <%= f.label :group_type, 'Credit', :value => 'credit' %>
+                </div>
+
+                <div id="row">
+
+                    <div class="column1">
+                        <p><%= f.label :payment_date, 'Payment Date' %></p>
+                    </div>
+                    <%= f.date_field :payment_date %>
+                </div>
+
+                <div id="row">
+
+                    <div class="column1">
+                        <p><%= f.label :payment_amount, 'Monthly Payment Amount $' %></p>
+                    </div>
+                    <%= f.number_field :payment_amount, placeholder: 50 %>
+                </div>
+
+                    <div id="submit-row">
+                        <div class="submit-row">
+                            <%= f.submit "Next Step", id: "submit-button" %>
+                        </div>
+                    </div>
+              </div>
+                  <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

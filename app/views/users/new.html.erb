@@ -1,28 +1,60 @@
-<h1>Sign Up</h1>
+<div id="content">
+    <div id="container">
 
-<div class="row">
-  <%= form_for(@user) do |f| %>
+        <div id="table" class="account-info">
+            <h4 class="table-title">Sign Up</h4>
 
-    <%= render 'shared/error_messages' %>
+            <div id="data">
+              <%= form_for(@user) do |f| %>
 
-    <%= f.label :first_name, 'First Name' %>
-    <%= f.text_field :first_name, placeholder: 'Clark' %>
+              <div id="row">
+                <div class="column1">
+                    <p><%= f.label :first_name, 'First Name' %></p>
+                </div>
+                <%= f.text_field :first_name, placeholder: 'Clark' %>
+            </div>
 
-    <%= f.label :last_name, 'Last Name' %>
-    <%= f.text_field :last_name, placeholder: 'Kent' %>
+            <div id="row">
+                <div class="column1">
+                    <p><%= f.label :last_name, 'Last Name' %></p>
+                </div>
+                <%= f.text_field :last_name, placeholder: 'Kent' %>
+            </div>
+            <div id="row">
+                <div class="column1">
+                    <p><%= f.label :email, 'Email' %></p>
+                </div>
+                <%= f.email_field :email, placeholder: 'clarkkent@gmail.com' %>
+            </div>
 
-    <%= f.label :email, 'Email' %>
-    <%= f.email_field :email, placeholder: 'clarkkent@gmail.com' %>
+            <div id="row">
+                <div class="column1">
+                    <p><%= f.label :password, 'Password' %></p>
+                </div>
+                <%= f.password_field :password, placeholder: 'Secure Password more than 6 characters' %>
+            </div>
 
-    <%= f.label :password, 'Password' %>
-    <%= f.password_field :password, placeholder: 'Secure Password more than 6 characters' %>
+            <div id="row">
+                <div class="column1">
+                    <p><%= f.label :account_name, 'Bank Institution Name' %></p>
+                </div>
+                <%= f.text_field :account_name, placeholder: 'Bank of America' %>
+            </div>
 
-    <%= f.label :account_name, 'Bank Institution Name' %>
-    <%= f.text_field :account_name, placeholder: 'Bank of America' %>
+            <div id="row">
+                <div class="column1">
+                    <p><%= f.label :account_number, 'Bank Account Number' %></p>
+                </div>
+                <%= f.number_field :account_number, placeholder: '111XXXXXXX' %>
+            </div>
 
-    <%= f.label :account_number, 'Bank Account Number' %>
-    <%= f.number_field :account_number, placeholder: '111XXXXXXX' %>
-
-    <%= f.submit "Create my account" %>
-  <% end %>
+            <div id="submit-row">
+                <div class="submit-row">
+                <%= f.submit "Create", id: "submit-button" %>
+                </div>
+            </div>
+              <% end %>
+            </div>
+        </div>
+    </div>
 </div>

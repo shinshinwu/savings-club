@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
                        :uniqueness => true,
                        :format => { :with => /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   has_secure_password
-  validates :password, length: { minimum: 6 }
+  validates :password, length: { minimum: 6 }, allow_blank: true
 
   def paid?(group_id)
     return UserGroup.find_by(user_id: self.id, group_id: group_id).paid

@@ -1,6 +1,7 @@
+require "nexmos"
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:edit, :update]
-  before_action :correct_user, only: [:edit, :update]
+  # before_action :logged_in_user, only: [:edit, :update]
+  # before_action :correct_user, only: [:edit, :update]
 
   def index
     #greeting page
@@ -62,13 +63,14 @@ class UsersController < ApplicationController
     @user.total_contribution += @group.payment_amount
     # update transaction
     Transaction.create(user_id: @user.id, group_id: @group.id, transaction_type: "debit", transaction_amount: @group.payment_amount)
+
     redirect_to @user
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :account_name, :account_number)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_digest, :account_name, :account_balance, :account_number, :total_contribution, :total_received)
   end
 
   def logged_in_user

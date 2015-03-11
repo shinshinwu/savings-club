@@ -1,40 +1,101 @@
-<h1>Group Specific Info Here</h1>
-<ul>
-  <li>Group: <%= @group.name %></li>
-  <li>Group Type: <%= @group.group_type %></li>
-</ul>
-<div id="content">
-  <div id="container">
-    <ul>
-      <li>Payment Amount per Month: <%= @group.payment_amount %></li>
-      <li>Payout Amount per Month: <%= @group.disbursement_amount %></li>
-      <li>Next Payout Date:  <%= @group.disbursement_date %></li>
-    </ul>
+<div id="profile">
 
-    <div id="table">
-      <h4 class="table-title">Member's Info</h4>
+  <div id="content">
 
-      <table class="reference" style="width: 100%">
-        <thead>
-          <tr class="brand-text-color">
-              <th>Members</th>
-              <th>Last Contribution Made On:</th>
-              <th>Paid?</th>
-          </tr>
-        </thead>
+    <div id='user-section' class="border-top">
+      <div id="container">
 
-        <tbody>
-          <% @group.users.each do |user| %>
-          <tr>
-              <td class="club-name"><%= user.first_name %></td>
-              <td><%= user.last_contribution.created_at.strftime('%a %d %b %Y') %></td>
-              <td><%= user.paid?(@group.id) %></td>
+        <div id="user-content">
 
-          </tr>
-          <% end %>
-        </tbody>
+          <div id="avatar" class="club-avatar">
+            <div id="club-symbol">
+            </div>
+          </div>
 
-      </table>
+          <div id="user-info">
+            <div id="user-name">
+              <p><%= @group.name %></p>
+            </div>
+
+            <div id="user-email">
+              <p><%= @group.group_type %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="content">
+      <div id="container">
+
+        <div id="table" class="account-info">
+          <h4 class="table-title">Account Info</h4>
+            <div id="data">
+              <div id="row">
+                  <div class="column1">
+                  <p>Monthly Payment Amount</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p>$<%= @group.payment_amount %></p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Next Monthly Payment</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p>April 5, 2015</p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Next Payout Date</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p><%= @group.disbursement_date.strftime('%a %d %b %Y') %></p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Payout Amount</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p>$<%= @group.disbursement_amount %></p>
+                    </div>
+                </div>
+        </div><!-- end #data -->
+        </div><!-- end #table .account-info -->
+
+        <div id="table">
+          <h4 class="table-title">Member's Info</h4>
+
+          <table class="reference" style="width: 100%">
+            <thead>
+              <tr class="brand-text-color">
+                  <th>Members</th>
+                  <th>Last Contribution Made On:</th>
+                  <th>Paid?</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% @group.users.each do |user| %>
+              <tr>
+                  <td class="club-name"><%= user.first_name %></td>
+                  <td><%= user.last_contribution.created_at.strftime('%a %d %b %Y') %></td>
+                  <td><%= user.paid?(@group.id).to_s.capitalize %></td>
+
+              </tr>
+              <% end %>
+            </tbody>
+
+          </table>
+        </div>
+      </div>
     </div>
   </div>
 </div>
