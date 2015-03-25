@@ -13,7 +13,9 @@ class UsersController < ApplicationController
     @last_contribution_group = Group.find(@user.last_contribution.group_id)
     @last_disbursement_group = Group.find(@user.last_disbursement.group_id)
     @credit = @user.groups.where(group_type: "Credit")
-    @savings = @user.groups.where(group_type: "Savings")
+    # @savings = @user.groups.where(group_type: "Savings")
+    # limit to first one set up just for yc demo
+    @savings = @user.groups.find_by(group_type: "Savings")
     @rando_interest_rate = rand(4..12)
   end
 

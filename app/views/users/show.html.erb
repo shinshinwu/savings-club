@@ -220,21 +220,19 @@ path.color1 {
             </tr>
           </thead>
           <tbody>
-          <% @savings.each do |group| %>
             <tr>
-              <td class="club-name"><a href="/groups/<%= group.id %>"><%= group.name %></a></td>
-              <td><%= group.users.count %></td>
-              <td><%= group.rounds_remaining %></td>
-              <td>$<%= group.payment_amount %></td>
-              <td>$<%= group.disbursement_amount %></td>
-              <td><%= @user.paid?(group.id).to_s.capitalize %></td>
-              <td><%= group.payment_date + 33 %></td>
+              <td class="club-name"><a href="/groups/<%= @savings.id %>"><%= @savings.name %></a></td>
+              <td><%= @savings.users.count %></td>
+              <td><%= @savings.rounds_remaining %></td>
+              <td>$<%= @savings.payment_amount %></td>
+              <td>$<%= @savings.disbursement_amount %></td>
+              <td><%= @user.paid?(@savings.id).to_s.capitalize %></td>
+              <td><%= @savings.payment_date + 33 %></td>
               <td>
-                <% if @user.transactions.where(group_id: group.id, transaction_type: "debit").last == nil || @user.transactions.where(group_id: group.id, transaction_type: "debit").last.created_at.mday != Time.now.getutc.mday %>
-                  <form action="/users/<%= @user.id %>/makepayment?group=<%= group.id %>" method="post">
+                <% if @user.transactions.where(group_id: @savings.id, transaction_type: "debit").last == nil || @user.transactions.where(group_id: @savings.id, transaction_type: "debit").last.created_at.mday != Time.now.getutc.mday %>
+                  <form action="/users/<%= @user.id %>/makepayment?group=<%= @savings.id %>" method="post">
                     <input type="submit" value="Pay" class="pay">
                   </form>
-                <% end %>
               </td>
             </tr>
           <% end %>

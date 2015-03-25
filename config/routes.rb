@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get 'login' => 'sessions#new'
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
+  get 'ycdemo' => 'sessions#ycdemo'
   resources :groups do
     member do
       get 'newmembers' => 'groups#new_members'
