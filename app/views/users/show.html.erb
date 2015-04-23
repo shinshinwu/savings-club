@@ -81,6 +81,8 @@ path.color1 {
       </div> <!-- end of container -->
     </div> <!-- end of user-section -->
 
+<% if current_user == @user %>
+
     <div id="container">
 
         <div id="table" class="account-info">
@@ -285,6 +287,70 @@ path.color1 {
       <button class="button" id="new-club"><%= link_to "Create New Group", new_group_path %></button>
       </div>
     </div>
+<% else %>
+      <div id="container">
+
+        <div id="table" class="account-info">
+          <h4 class="table-title">User Performance Info</h4>
+            <div id="data">
+              <div id="row">
+                  <div class="column1">
+                  <p>KashWe User Since</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p><%= @user.created_at.strftime('%a %d %b %Y') %></p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>KashWe Rating</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p>Metrics To Be Determined</p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Savings Groups Participated To Date</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p><%= @user.groups.where(group_type: "Savings").count %></p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Lending Groups Participated To Date</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p><%= @user.groups.where(group_type: "Credit").count %></p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Delinquency Rate</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p>Metrics To Be Determined</p>
+                    </div>
+                </div>
+                <div id="row">
+                  <div class="column1">
+                  <p>Default Rate</p>
+                    </div>
+                    <div class="fltrt">:</div>
+                    <div class="column2 form-input">
+                  <p>Metrics To Be Determined</p>
+                    </div>
+                </div>
+        </div><!-- end #data -->
+        </div><!-- end #table .account-info -->
+
+<% end %>
   </div>
 </div>
 

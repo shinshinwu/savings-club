@@ -1,4 +1,6 @@
-require "nexmos"
+require 'dotenv'
+require 'httparty'
+
 class UsersController < ApplicationController
   # before_action :logged_in_user, only: [:edit, :update]
   # before_action :correct_user, only: [:edit, :update]
@@ -65,6 +67,28 @@ class UsersController < ApplicationController
     Transaction.create(user_id: @user.id, group_id: @group.id, transaction_type: "debit", transaction_amount: @group.payment_amount)
 
     redirect_to @user
+  end
+
+  def oauth
+    # need to check if user has connected dowalla already
+    user = current_user
+    client_id = ENV['DWOLLA_KEY']
+    redirect_to 'https://www.dwolla.com/oauth/v2/authenticate?client_id=#{client_id}&response_type=code&redirect_uri=localhost%3A3000%2Fusers%2F#{user.id}%2Fcallback&scope=AccountInfoFull|Transactions|Balance|Send|Request|Funding|ManageAccount'
+  end
+
+  def callback
+    user = current_user
+    authorization_code = params['code']
+    client_id = ENV['DWOLLA_KEY']
+    client_secret = ENV['DWOLLA_SECRET']
+    token_response = HTTParty.post("https://www.dwolla.com/oauth/v2/token/client_id=#{client_id}&client_secret=#{client_secret}&code=#{authorization_code}&grant_type=authorization_code&redirect_uri=localhost%3A3000%2Fusers%2F#{user.id}%2Fcallback")
+    dwolla_token = token_response["access_token"]
+    dwolla_refresh_token = token_response["refresh_token"]
+    user.dwolla_token = dwolla_token
+    user.dwolla_refresh_token = dwolla_refresh_token
+    user.save
+
+    redirect_to user
   end
 
   private
