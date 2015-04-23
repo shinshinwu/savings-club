@@ -1,5 +1,6 @@
 require 'dotenv'
 require 'httparty'
+require 'dwolla'
 
 class UsersController < ApplicationController
   # before_action :logged_in_user, only: [:edit, :update]
@@ -72,16 +73,25 @@ class UsersController < ApplicationController
   def oauth
     # need to check if user has connected dowalla already
     user = current_user
-    client_id = ENV['DWOLLA_KEY']
-    redirect_to 'https://www.dwolla.com/oauth/v2/authenticate?client_id=#{client_id}&response_type=code&redirect_uri=localhost%3A3000%2Fusers%2F#{user.id}%2Fcallback&scope=AccountInfoFull|Transactions|Balance|Send|Request|Funding|ManageAccount'
+    Dwolla::api_key = ENV['DWOLLA_KEY']
+    if user.dwolla_token.nil?
+      redirect_uri = "http%3A%2F%2Flocalhost%3A3000%2Fusers%2F#{user.id}%2Fcallback"
+      # redirect_to "https://www.dwolla.com/oauth/v2/authenticate?client_id=#{client_id}&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2F#{user.id}%2Fcallback&scope=send|transactions"
+      authUrl = Dwolla::OAuth.get_auth_url(redirect_uri)
+      redirect_to authUrl
+    else
+      redirect_to user
+    end
   end
 
   def callback
     user = current_user
     authorization_code = params['code']
-    client_id = ENV['DWOLLA_KEY']
-    client_secret = ENV['DWOLLA_SECRET']
-    token_response = HTTParty.post("https://www.dwolla.com/oauth/v2/token/client_id=#{client_id}&client_secret=#{client_secret}&code=#{authorization_code}&grant_type=authorization_code&redirect_uri=localhost%3A3000%2Fusers%2F#{user.id}%2Fcallback")
+    redirect_uri = "http%3A%2F%2Flocalhost%3A3000%2Fusers%2F#{user.id}%2Fcallback"
+    Dwolla::api_key = ENV['DWOLLA_KEY']
+    Dwolla::api_secret = ENV['DWOLLA_SECRET']
+    # Dwolla::token = HTTParty.post("https://www.dwolla.com/oauth/v2/token/client_id=#{client_id}&client_secret=#{client_secret}&code=#{authorization_code}&grant_type=authorization_code&redirect_uri=localhost%3A3000%2Fusers%2F#{user.id}%2Fcallback")
+    token_response = Dwolla::OAuth.get_token(authorization_code, redirect_uri)
     dwolla_token = token_response["access_token"]
     dwolla_refresh_token = token_response["refresh_token"]
     user.dwolla_token = dwolla_token
