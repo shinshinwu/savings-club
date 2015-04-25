@@ -136,7 +136,11 @@ path.color1 {
                     </div>
                     <div class="fltrt">:</div>
                     <div class="column2 form-input">
-                  <p>$<%= @user.last_contribution.transaction_amount %> on <%= @user.last_contribution.created_at.strftime('%a %d %b %Y') %> to Group <%= @last_contribution_group.name %></p>
+                  <% if @user.last_contribution.nil? %>
+                    <p>You do not have any posted transactions, join a group today!</p>
+                  <% else %>
+                    <p>$<%= @user.last_contribution.transaction_amount %> on <%= @user.last_contribution.created_at.strftime('%a %d %b %Y') %> to Group <%= @last_contribution_group.name %></p>
+                  <% end %>
                     </div>
                 </div>
                 <div id="row">
@@ -154,7 +158,11 @@ path.color1 {
                     </div>
                     <div class="fltrt">:</div>
                     <div class="column2 form-input">
-                  <p>$<%= @user.last_disbursement.transaction_amount %> on <%= @user.last_disbursement.created_at.strftime('%a %d %b %Y') %> from Group <%= @last_disbursement_group.name %></p>
+                  <% if @user.last_contribution.nil? %>
+                      <p>You do not have any posted transactions, join a group today!</p>
+                  <% else %>
+                    <p>$<%= @user.last_disbursement.transaction_amount %> on <%= @user.last_disbursement.created_at.strftime('%a %d %b %Y') %> from Group <%= @last_disbursement_group.name %></p>
+                  <% end %>
                     </div>
                 </div>
                 <div id="row">
