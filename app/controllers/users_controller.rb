@@ -72,18 +72,13 @@ class UsersController < ApplicationController
   end
 
   def oauth
-    # need to check if user has connected dowalla already
     user = current_user
     Dwolla::api_key = ENV['DWOLLA_KEY']
     Dwolla::api_secret = ENV['DWOLLA_SECRET']
     Dwolla::sandbox = true
     if user.dwolla_token.nil?
       redirect_uri = "http://localhost:3000/users/#{user.id}/callback"
-      # redirect_to "https://www.dwolla.com/oauth/v2/authenticate?client_id=#{client_id}&response_type=code&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2F#{user.id}%2Fcallback&scope=send|transactions"
-
-      # https://www.dwolla.com/oauth/v2/authenticate?client_id=NqVSIQ%2Btw3D8Qtl8dHbXuCTN8KM%2BlLJOSCUEwDvZigvlr3r13R&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2F8%2Fcallback&response_type=code&scope=send%7Ctransactions%7Cbalance%7Crequest%7Ccontacts%7Caccountinfofull%7Cfunding
       authUrl = Dwolla::OAuth.get_auth_url(redirect_uri)
-      p URI.unescape(authUrl)
       redirect_to authUrl
     else
       redirect_to user
@@ -96,7 +91,6 @@ class UsersController < ApplicationController
     redirect_uri = "http://localhost:3000/users/#{user.id}/callback"
     Dwolla::api_key = ENV['DWOLLA_KEY']
     Dwolla::api_secret = ENV['DWOLLA_SECRET']
-    # Dwolla::token = HTTParty.post("https://www.dwolla.com/oauth/v2/token/client_id=#{client_id}&client_secret=#{client_secret}&code=#{authorization_code}&grant_type=authorization_code&redirect_uri=localhost%3A3000%2Fusers%2F#{user.id}%2Fcallback")
     token_response = Dwolla::OAuth.get_token(authorization_code, redirect_uri)
     dwolla_token = token_response["access_token"]
     dwolla_refresh_token = token_response["refresh_token"]
