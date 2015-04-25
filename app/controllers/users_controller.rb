@@ -14,8 +14,8 @@ class UsersController < ApplicationController
   def show
     #user profile page that shows questions
     @user = User.find(params[:id])
-    @last_contribution_group = Group.find(@user.last_contribution.group_id)
-    @last_disbursement_group = Group.find(@user.last_disbursement.group_id)
+    @last_contribution_group = Group.find(@user.last_contribution.group_id) unless @user.last_contribution.nil?
+    @last_disbursement_group = Group.find(@user.last_disbursement.group_id) unless @user.last_disbursement.nil?
     @credit = @user.groups.where(group_type: "Credit")
     @savings = @user.groups.where(group_type: "Savings")
     @rando_interest_rate = rand(4..12)
