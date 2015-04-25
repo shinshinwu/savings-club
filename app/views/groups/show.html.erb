@@ -85,7 +85,7 @@
             <tbody>
               <% @group.users.each do |user| %>
               <tr>
-                  <td class="club-name"><%= user.first_name %></td>
+                  <td class="club-name"><%= link_to "#{user.first_name}", user %></td>
                   <td><%= user.last_contribution.created_at.strftime('%a %d %b %Y') %></td>
                   <td><%= user.paid?(@group.id).to_s.capitalize %></td>
 

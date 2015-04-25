@@ -1,4 +1,8 @@
-require "nexmos"
+require 'dotenv'
+require 'httparty'
+require 'dwolla'
+require 'uri'
+
 class UsersController < ApplicationController
   # before_action :logged_in_user, only: [:edit, :update]
   # before_action :correct_user, only: [:edit, :update]
@@ -65,6 +69,36 @@ class UsersController < ApplicationController
     Transaction.create(user_id: @user.id, group_id: @group.id, transaction_type: "debit", transaction_amount: @group.payment_amount)
 
     redirect_to @user
+  end
+
+  def oauth
+    user = current_user
+    Dwolla::api_key = ENV['DWOLLA_KEY']
+    Dwolla::api_secret = ENV['DWOLLA_SECRET']
+    Dwolla::sandbox = true
+    if user.dwolla_token.nil?
+      redirect_uri = "http://localhost:3000/users/#{user.id}/callback"
+      authUrl = Dwolla::OAuth.get_auth_url(redirect_uri)
+      redirect_to authUrl
+    else
+      redirect_to user
+    end
+  end
+
+  def callback
+    user = current_user
+    authorization_code = params['code']
+    redirect_uri = "http://localhost:3000/users/#{user.id}/callback"
+    Dwolla::api_key = ENV['DWOLLA_KEY']
+    Dwolla::api_secret = ENV['DWOLLA_SECRET']
+    token_response = Dwolla::OAuth.get_token(authorization_code, redirect_uri)
+    dwolla_token = token_response["access_token"]
+    dwolla_refresh_token = token_response["refresh_token"]
+    user.dwolla_token = dwolla_token
+    user.dwolla_refresh_token = dwolla_refresh_token
+    user.save
+
+    redirect_to user
   end
 
   private

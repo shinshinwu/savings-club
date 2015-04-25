@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150307174609) do
+ActiveRecord::Schema.define(version: 20150423194355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,10 +52,12 @@ ActiveRecord::Schema.define(version: 20150307174609) do
     t.string   "account_name"
     t.integer  "account_balance"
     t.integer  "account_number"
-    t.integer  "total_contribution", default: 0
-    t.integer  "total_received",     default: 0
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.integer  "total_contribution",   default: 0
+    t.integer  "total_received",       default: 0
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.string   "dwolla_token"
+    t.string   "dwolla_refresh_token"
   end
 
 end

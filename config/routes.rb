@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   root 'users#index'
   resources :users do
     member do
+      get 'authorize' => 'users#oauth'
+      get 'callback' => 'users#callback'
       post 'makepayment' => 'users#make_payment'
     end
   end
