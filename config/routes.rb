@@ -21,6 +21,7 @@ Rails.application.routes.draw do
     member do
       get 'newmembers' => 'groups#new_members'
       post 'addmembers' => 'groups#add_members'
+      post 'distribution' => 'groups#distribution'
     end
   end
 
