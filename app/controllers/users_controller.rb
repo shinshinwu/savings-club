@@ -61,8 +61,6 @@ class UsersController < ApplicationController
   def make_payment
     # update user payment amount
     @user = User.find(params[:id])
-    p params
-    p params[:group]
     @group = Group.find(params[:group])
     @user.total_contribution += @group.payment_amount
     # update transaction
@@ -89,16 +87,40 @@ class UsersController < ApplicationController
     user = current_user
     authorization_code = params['code']
     redirect_uri = "http://localhost:3000/users/#{user.id}/callback"
-    Dwolla::api_key = ENV['DWOLLA_KEY']
-    Dwolla::api_secret = ENV['DWOLLA_SECRET']
     token_response = Dwolla::OAuth.get_token(authorization_code, redirect_uri)
     dwolla_token = token_response["access_token"]
+    Dwolla::token = dwolla_token
     dwolla_refresh_token = token_response["refresh_token"]
     user.dwolla_token = dwolla_token
     user.dwolla_refresh_token = dwolla_refresh_token
+    # updating user's account balance
+    user.account_balance = Dwolla::Balance.get
     user.save
 
     redirect_to user
+  end
+
+  def confirm_reserve
+    @group = Group.find(params[:group_id])
+    @user = current_user
+    # need to make sure the user confirming is logged in
+  end
+
+  def deposit_reserve
+    @group = Group.find(params[:group_id])
+    p pin = params[:dwolla_pin]
+    user = current_user
+    transaction = Transaction.create(user_id: user.id, group_id: @group.id, transaction_type: "reserve", transaction_amount: @group.payment_amount)
+      # actually post the transactions on Dwolla
+    refresh_token(user.id)
+    user.reload
+    p Dwolla::token = user.dwolla_token
+    Dwolla::Transactions.send({
+      :destinationId => '812-111-0880',
+      :amount => @group.payment_amount,
+      :pin => pin
+    })
+    redirect_to @group
   end
 
   private
@@ -116,5 +138,19 @@ class UsersController < ApplicationController
   def correct_user
     @user = User.find(params[:id])
     redirect_to(root_url) unless current_user?(@user)
+  end
+
+  def refresh_token(user_id)
+    Dwolla::api_key = ENV['DWOLLA_KEY']
+    Dwolla::api_secret = ENV['DWOLLA_SECRET']
+    Dwolla::sandbox = true
+    user = User.find(user_id)
+    p user
+    p user.dwolla_refresh_token
+    token_response = Dwolla::OAuth.refresh_auth(user.dwolla_refresh_token)
+    user.dwolla_token = token_response['access_token']
+    user.dwolla_refresh_token = token_response['refresh_token']
+
+    user.save
   end
 end

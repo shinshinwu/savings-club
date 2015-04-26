@@ -9,6 +9,8 @@ Rails.application.routes.draw do
       get 'authorize' => 'users#oauth'
       get 'callback' => 'users#callback'
       post 'makepayment' => 'users#make_payment'
+      get 'confirmgroup' => 'users#confirm_reserve'
+      post 'depositreserve' => 'users#deposit_reserve'
     end
   end
   get 'signup' => 'users#new'

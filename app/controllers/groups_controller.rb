@@ -27,7 +27,12 @@ class GroupsController < ApplicationController
       end
     end
     @group.update(disbursement_amount: @group.users.count * @group.payment_amount)
-    redirect_to @group
+    # only redirect to pay reserve if it is a savings group
+    if @group.group_type == "Savings"
+      redirect_to "/users/#{current_user.id}/confirmgroup?group_id=#{@group.id}"
+    else
+      redirect_to @group
+    end
   end
 
   def show
