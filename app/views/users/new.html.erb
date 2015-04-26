@@ -34,20 +34,6 @@
                 <%= f.password_field :password, placeholder: 'Secure Password more than 6 characters' %>
             </div>
 
-            <div id="row">
-                <div class="column1">
-                    <p><%= f.label :account_name, 'Bank Institution Name' %></p>
-                </div>
-                <%= f.text_field :account_name, placeholder: 'Bank of America' %>
-            </div>
-
-            <div id="row">
-                <div class="column1">
-                    <p><%= f.label :account_number, 'Bank Account Number' %></p>
-                </div>
-                <%= f.number_field :account_number, placeholder: '111XXXXXXX' %>
-            </div>
-
             <div id="submit-row">
                 <div class="submit-row">
                 <%= f.submit "Create", id: "submit-button" %>

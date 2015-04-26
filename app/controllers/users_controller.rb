@@ -65,6 +65,16 @@ class UsersController < ApplicationController
     @user.total_contribution += @group.payment_amount
     # update transaction
     Transaction.create(user_id: @user.id, group_id: @group.id, transaction_type: "debit", transaction_amount: @group.payment_amount)
+    refresh_token(@user.id)
+    @user.reload
+    Dwolla::token = @user.dwolla_token
+    Dwolla::Transactions.send({
+      :destinationId => winner.dwolla_id,
+      :amount => @group.payment_amount,
+      :pin => @user.pin
+    })
+    @user.account_balance = Dwolla::Balance.get
+    @user.save
 
     redirect_to @user
   end
@@ -91,6 +101,8 @@ class UsersController < ApplicationController
     dwolla_token = token_response["access_token"]
     Dwolla::token = dwolla_token
     dwolla_refresh_token = token_response["refresh_token"]
+    user_info = Dwolla::Users.get(user.email)
+    user.dwolla_id = user_info['Id']
     user.dwolla_token = dwolla_token
     user.dwolla_refresh_token = dwolla_refresh_token
     # updating user's account balance
@@ -108,25 +120,29 @@ class UsersController < ApplicationController
 
   def deposit_reserve
     @group = Group.find(params[:group_id])
-    p pin = params[:dwolla_pin]
+    pin = params[:dwolla_pin]
     user = current_user
+    user.pin = pin
+    user.save
     transaction = Transaction.create(user_id: user.id, group_id: @group.id, transaction_type: "reserve", transaction_amount: @group.payment_amount)
       # actually post the transactions on Dwolla
     refresh_token(user.id)
     user.reload
-    p Dwolla::token = user.dwolla_token
+    Dwolla::token = user.dwolla_token
     Dwolla::Transactions.send({
-      :destinationId => '812-111-0880',
+      :destinationId => '812-740-4928',
       :amount => @group.payment_amount,
       :pin => pin
     })
+    user.account_balance = Dwolla::Balance.get
+    user.save
     redirect_to @group
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_digest, :account_name, :account_balance, :account_number, :total_contribution, :total_received)
+    params.require(:user).permit(:first_name, :last_name, :email, :password, :password_digest)
   end
 
   def logged_in_user
