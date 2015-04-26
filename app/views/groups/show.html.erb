@@ -86,7 +86,11 @@
               <% @group.users.each do |user| %>
               <tr>
                   <td class="club-name"><%= link_to "#{user.first_name}", user %></td>
+                  <% if user.last_contribution.nil? %>
+                  <td>No Contributions Yet</td>
+                  <% else %>
                   <td><%= user.last_contribution.created_at.strftime('%a %d %b %Y') %></td>
+                  <% end %>
                   <td><%= user.paid?(@group.id).to_s.capitalize %></td>
 
               </tr>
